@@ -1,0 +1,71 @@
+<div class="page" id="page-roles">
+      <div class="page-title">สิทธิ์และผู้ใช้งาน</div>
+      <div class="page-sub">กำหนดระดับการเข้าถึงสำหรับแต่ละบทบาทในองค์กร</div>
+
+      <div class="section-hd" style="margin-bottom:14px">ระดับการเข้าถึง</div>
+      <div class="role-card" style="border-color:rgba(240,78,78,0.25)">
+        <div class="role-icon" style="background:var(--danger-bg);border:1px solid rgba(240,78,78,0.25)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--danger)"><path d="M12 1L3 5v6c0 5.5 3.5 10.7 8 12.1 4.5-1.4 8-6.6 8-12.1V5l-8-4zm-1 14l-3-3 1.4-1.4 1.6 1.6 4-4L15.4 9.6 11 15z"/></svg>
+        </div>
+        <div class="role-body">
+          <div class="role-name" style="color:var(--danger)">System Admin</div>
+          <div class="role-desc">ตั้งค่าได้ทุกอย่าง รวมถึงเชื่อมต่อมอดูล กำหนดเงื่อนไข และจัดการผู้ใช้งาน</div>
+          <div class="perm-tags"><span class="perm-tag" style="border-color:rgba(240,78,78,0.3);color:var(--danger)">ตั้งค่าระบบ</span><span class="perm-tag" style="border-color:rgba(240,78,78,0.3);color:var(--danger)">แก้ไข</span><span class="perm-tag" style="border-color:rgba(240,78,78,0.3);color:var(--danger)">ลบ</span><span class="perm-tag" style="border-color:rgba(240,78,78,0.3);color:var(--danger)">จัดการผู้ใช้</span><span class="perm-tag" style="border-color:rgba(240,78,78,0.3);color:var(--danger)">ดูรายงาน</span></div>
+        </div>
+        <span class="badge ok"><span class="badge-dot"></span>ใช้งาน</span>
+      </div>
+
+      <div class="role-card" style="border-color:rgba(245,166,35,0.2)">
+        <div class="role-icon" style="background:var(--warn-bg);border:1px solid rgba(245,166,35,0.25)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--warn)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <div class="role-body">
+          <div class="role-name" style="color:var(--warn)">ผู้บริหารหน่วย / หัวหน้างาน</div>
+          <div class="role-desc">ดูแดชบอร์ด กดปุ่ม Re-assign และ Escalate ได้ แต่แก้ไขการตั้งค่าระบบไม่ได้</div>
+          <div class="perm-tags"><span class="perm-tag" style="border-color:rgba(245,166,35,0.3);color:var(--warn)">ดูแดชบอร์ด</span><span class="perm-tag" style="border-color:rgba(245,166,35,0.3);color:var(--warn)">Re-assign</span><span class="perm-tag" style="border-color:rgba(245,166,35,0.3);color:var(--warn)">Escalate</span><span class="perm-tag" style="border-color:rgba(245,166,35,0.3);color:var(--warn)">ดูรายงาน</span></div>
+        </div>
+        <span class="badge warn"><span class="badge-dot"></span>จำกัด</span>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon" style="background:var(--info-bg);border:1px solid rgba(74,158,245,0.25)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--info)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+        <div class="role-body">
+          <div class="role-name" style="color:var(--info)">เจ้าหน้าที่</div>
+          <div class="role-desc">รับการแจ้งเตือนและดูสถานะงานของตัวเองเท่านั้น ไม่สามารถดูข้อมูลของคนอื่นได้</div>
+          <div class="perm-tags"><span class="perm-tag" style="border-color:rgba(74,158,245,0.3);color:var(--info)">รับแจ้งเตือน</span><span class="perm-tag" style="border-color:rgba(74,158,245,0.3);color:var(--info)">ดูสถานะตัวเอง</span></div>
+        </div>
+        <span class="badge info">อ่านอย่างเดียว</span>
+      </div>
+
+      <div class="sep"></div>
+      <div class="section-hd" style="margin-bottom:14px">ผู้ดูแลระบบปัจจุบัน</div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ชื่อ</th><th>ตำแหน่ง</th><th>ระดับสิทธิ์</th><th>เข้าใช้ล่าสุด</th><th>จัดการ</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="row" style="gap:8px"><div class="staff-av av-danger" style="width:28px;height:28px;font-size:10px">PW</div><span style="color:var(--text-pri);font-weight:500">นางสาวปวีณา ศรีสุข</span></div></td>
+                <td>ผู้อำนวยการกอง</td>
+                <td><span class="badge danger"><span class="badge-dot"></span>System Admin</span></td>
+                <td class="mono">วันนี้ 10:30</td>
+                <td><button class="btn-sm">แก้ไข</button></td>
+              </tr>
+              <tr>
+                <td><div class="row" style="gap:8px"><div class="staff-av av-warn" style="width:28px;height:28px;font-size:10px">WC</div><span style="color:var(--text-pri);font-weight:500">นายวิชัย มานะดี</span></div></td>
+                <td>หัวหน้าฝ่ายการเงิน</td>
+                <td><span class="badge warn"><span class="badge-dot"></span>ผู้บริหารหน่วย</span></td>
+                <td class="mono">วันนี้ 09:15</td>
+                <td><button class="btn-sm">แก้ไข</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row" style="justify-content:flex-end;gap:10px;margin-top:20px">
+        <button class="btn">ยกเลิก</button>
+        <button class="btn btn-primary" onclick="showToast('บันทึกการตั้งค่าสิทธิ์เรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
+      </div>
+    </div>

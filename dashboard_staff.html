@@ -1,0 +1,183 @@
+<div class="page active" id="page-dashboard-staff">
+  <div class="row-between mb-md">
+    <div>
+      <div class="page-title">Dashboard บุคลากร</div>
+      <div class="page-sub">Staff View · <span id="staff-dept-label">หน่วยงาน</span> · อัปเดตล่าสุด: 28/04/2569 09:42</div>
+    </div>
+    <div class="row" style="gap: 8px;">
+      <span class="badge" style="background:var(--ok-bg);color:var(--ok);border:1px solid rgba(56,161,105,0.2); font-size: 12px; padding: 6px 14px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--ok)" style="margin-right:4px;vertical-align:middle;"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        บุคลากร
+      </span>
+    </div>
+  </div>
+
+  <!-- Metric Cards (personal focus) -->
+  <div class="metrics-row">
+    <div class="metric danger">
+      <div class="metric-label">งานเร่งด่วน</div>
+      <div class="metric-value" id="staff-m-critical">0</div>
+      <div class="metric-sub" style="color: var(--danger)">ต้องดำเนินการทันที</div>
+    </div>
+    <div class="metric warn">
+      <div class="metric-label">งานรอดำเนินการ</div>
+      <div class="metric-value" id="staff-m-high">0</div>
+      <div class="metric-sub">กำลังดำเนินการ</div>
+    </div>
+    <div class="metric info">
+      <div class="metric-label">งานที่ได้รับมอบหมาย</div>
+      <div class="metric-value" id="staff-m-tracking">0</div>
+      <div class="metric-sub">ทั้งหมด</div>
+    </div>
+    <div class="metric ok">
+      <div class="metric-label">เสร็จสิ้นแล้ว</div>
+      <div class="metric-value" id="staff-m-closed">0</div>
+      <div class="metric-sub" style="color: var(--ok)">ปิดเคสแล้ว</div>
+    </div>
+  </div>
+
+  <!-- My Tasks Table -->
+  <div class="card" style="margin-bottom: 20px;">
+    <div class="row-between mb-md" style="margin-bottom: 16px;">
+      <div class="card-title" style="margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
+         <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--info)"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg> 
+         งานของฉัน (My Tasks)
+      </div>
+      <div class="row" style="gap: 10px;">
+         <input type="text" id="search-risk-staff" onkeyup="filterRiskTable('risk-tbody-staff','search-risk-staff','filter-risk-staff')" class="form-input" placeholder="ค้นหางาน..." style="padding: 6px 12px; width: 140px;">
+         <select class="form-select" id="filter-risk-staff" onchange="filterRiskTable('risk-tbody-staff','search-risk-staff','filter-risk-staff')" style="padding: 6px 12px;">
+           <option value="all">ทุกระดับ</option>
+           <option value="CRITICAL">CRITICAL (วิกฤต)</option>
+           <option value="HIGH">HIGH (สูง)</option>
+           <option value="MEDIUM">MEDIUM (ปานกลาง)</option>
+           <option value="LOW">LOW (ต่ำ)</option>
+         </select>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>งาน / รายละเอียด</th>
+            <th>ระดับ</th>
+            <th>สถานะ</th>
+            <th style="text-align: right;"></th>
+          </tr>
+        </thead>
+        <tbody id="risk-tbody-staff">
+          <tr data-dept="finance">
+            <td>
+              <span class="pri" style="display:block;color:var(--text-pri);font-weight:600;font-size:14px;margin-bottom:2px">รายงานงบประมาณ Q2</span>
+              <span style="font-size:12px;color:var(--text-sec)">งานการเงิน · นายสมชาย ใจดี</span>
+            </td>
+            <td><span class="badge danger"><span class="badge-dot"></span>CRITICAL</span></td>
+            <td><span class="badge" style="background:var(--info-bg);color:var(--info);border:1px solid rgba(49,130,206,0.2)">เปิด</span></td>
+            <td style="text-align: right;"><button class="btn-sm" onclick="openDetail('001', 'รายงานงบประมาณ Q2', 'งานการเงิน · นายสมชาย ใจดี', 'danger', 'CRITICAL', 'เปิด')">ดู</button></td>
+          </tr>
+          <tr data-dept="supply">
+            <td>
+              <span class="pri" style="display:block;color:var(--text-pri);font-weight:600;font-size:14px;margin-bottom:2px">สัญญาจัดซื้อครุภัณฑ์</span>
+              <span style="font-size:12px;color:var(--text-sec)">งานพัสดุ · นางสาวมาลี รักดี</span>
+            </td>
+            <td><span class="badge danger"><span class="badge-dot"></span>CRITICAL</span></td>
+            <td><span class="badge warn" style="background:transparent;border-color:var(--warn);color:var(--warn)">ติดตาม</span></td>
+            <td style="text-align: right;"><button class="btn-sm" onclick="openDetail('002', 'สัญญาจัดซื้อครุภัณฑ์', 'งานพัสดุ · นางสาวมาลี รักดี', 'danger', 'CRITICAL', 'ติดตาม')">ดู</button></td>
+          </tr>
+          <tr data-dept="registrar">
+            <td>
+              <span class="pri" style="display:block;color:var(--text-pri);font-weight:600;font-size:14px;margin-bottom:2px">บันทึกทะเบียนนักศึกษา</span>
+              <span style="font-size:12px;color:var(--text-sec)">งานทะเบียน · นายวิชาย ทำดี</span>
+            </td>
+            <td><span class="badge" style="background:var(--danger-dim);color:var(--danger);border:1px solid rgba(229,62,62,0.1)"><span class="badge-dot" style="background:var(--danger)"></span>HIGH</span></td>
+            <td><span class="badge" style="background:var(--info-bg);color:var(--info);border:1px solid rgba(49,130,206,0.2)">เปิด</span></td>
+            <td style="text-align: right;"><button class="btn-sm" onclick="openDetail('003', 'บันทึกทะเบียนนักศึกษา', 'งานทะเบียน · นายวิชาย ทำดี', 'warn', 'HIGH', 'เปิด')">ดู</button></td>
+          </tr>
+          <tr data-dept="hr">
+            <td>
+              <span class="pri" style="display:block;color:var(--text-pri);font-weight:600;font-size:14px;margin-bottom:2px">ประมวลผลเงินเดือนประจำเดือน</span>
+              <span style="font-size:12px;color:var(--text-sec)">งานทรัพยากรบุคคล · นางเพ็ญ ชยัน</span>
+            </td>
+            <td><span class="badge" style="background:var(--danger-dim);color:var(--danger);border:1px solid rgba(229,62,62,0.1)"><span class="badge-dot" style="background:var(--danger)"></span>HIGH</span></td>
+            <td><span class="badge warn" style="background:transparent;border-color:var(--warn);color:var(--warn)">ติดตาม</span></td>
+            <td style="text-align: right;"><button class="btn-sm" onclick="openDetail('004', 'ประมวลผลเงินเดือนประจำเดือน', 'งานทรัพยากรบุคคล · นางเพ็ญ ชยัน', 'warn', 'HIGH', 'ติดตาม')">ดู</button></td>
+          </tr>
+          <tr data-dept="admin-dept">
+            <td>
+              <span class="pri" style="display:block;color:var(--text-pri);font-weight:600;font-size:14px;margin-bottom:2px">จัดทำคู่มือปฏิบัติงาน</span>
+              <span style="font-size:12px;color:var(--text-sec)">งานธุรการ · นายก้อง มุ่งมั่น</span>
+            </td>
+            <td><span class="badge warn"><span class="badge-dot"></span>MEDIUM</span></td>
+            <td><span class="badge warn" style="background:transparent;border-color:var(--warn);color:var(--warn)">ติดตาม</span></td>
+            <td style="text-align: right;"><button class="btn-sm" onclick="openDetail('005', 'จัดทำคู่มือปฏิบัติงาน', 'งานธุรการ · นายก้อง มุ่งมั่น', 'warn', 'MEDIUM', 'ติดตาม')">ดู</button></td>
+          </tr>
+          <tr data-dept="it">
+            <td>
+              <span class="pri" style="display:block;color:var(--text-pri);font-weight:600;font-size:14px;margin-bottom:2px">ปรับปรุงฐานข้อมูลบุคลากร</span>
+              <span style="font-size:12px;color:var(--text-sec)">งานสารสนเทศ · นางสาวใจ ดีงาม</span>
+            </td>
+            <td><span class="badge ok"><span class="badge-dot"></span>LOW</span></td>
+            <td><span class="badge" style="background:transparent;border:1px solid var(--border);color:var(--text-sec)">ปิดแล้ว</span></td>
+            <td style="text-align: right;"><button class="btn-sm" onclick="openDetail('006', 'ปรับปรุงฐานข้อมูลบุคลากร', 'งานสารสนเทศ · นางสาวใจ ดีงาม', 'ok', 'LOW', 'ปิดแล้ว')">ดู</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- My Alerts (notifications received) -->
+  <div class="card">
+    <div class="row-between" style="margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:0; display:flex; align-items:center; gap:8px;">
+         <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--warn)"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg> 
+         การแจ้งเตือนของฉัน
+      </div>
+      <span style="font-size:11px;color:var(--text-ter);">วันนี้</span>
+    </div>
+    <div class="staff-list">
+       <div class="log-item" data-dept="finance" style="grid-template-columns: 28px 1fr auto; gap: 12px; padding: 10px 0; cursor: pointer;" onclick="openLogDetail('09:42', 'งบประมาณ Q2 เกิน SLA วิกฤต', 'งานการเงิน · นายสมชาย ใจดี', 'danger', 'วิกฤต', 'ส่งแจ้งเตือนไปยังผู้บริหารแล้ว')">
+         <div class="role-icon" style="width:28px;height:28px;background:var(--danger-bg);border-radius:6px;border:1px solid rgba(229,62,62,0.2);">
+           <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--danger)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+         </div>
+         <div>
+           <div class="log-title" style="font-size:13px;">งบประมาณ Q2 เกิน SLA วิกฤต</div>
+           <div class="log-desc" style="font-size:11px;">งานการเงิน · นายสมชาย ใจดี</div>
+         </div>
+         <div class="log-time" style="font-size:11px">09:42</div>
+       </div>
+       
+       <div class="log-item" data-dept="registrar" style="grid-template-columns: 28px 1fr auto; gap: 12px; padding: 10px 0; cursor: pointer;" onclick="openLogDetail('08:15', 'ภาระงานทะเบียนเกิน 85%', 'งานทะเบียน · นายวิชาย ทำดี', 'warn', 'เฝ้าระวัง', 'ส่งแจ้งเตือนให้เจ้าหน้าที่แล้ว')">
+         <div class="role-icon" style="width:28px;height:28px;background:var(--warn-bg);border-radius:6px;border:1px solid rgba(221,107,32,0.2);">
+           <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warn)"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+         </div>
+         <div>
+           <div class="log-title" style="font-size:13px;">ภาระงานทะเบียนเกิน 85%</div>
+           <div class="log-desc" style="font-size:11px;">งานทะเบียน · นายวิชาย ทำดี</div>
+         </div>
+         <div class="log-time" style="font-size:11px">08:15</div>
+       </div>
+
+       <div class="log-item" data-dept="supply" style="grid-template-columns: 28px 1fr auto; gap: 12px; padding: 10px 0; cursor: pointer;" onclick="openLogDetail('07:30', 'พัสดุ: เอกสารสัญญาไม่ครบ', 'งานพัสดุ · นางสาวมาลี รักดี', 'info', 'ข้อมูล', 'แจ้งกลับไปยังต้นสังกัด')">
+         <div class="role-icon" style="width:28px;height:28px;background:var(--bg-hover);border-radius:6px;border:1px solid var(--border-md);">
+           <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--text-sec)"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 1-2.4 1.84-2.82 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+         </div>
+         <div>
+           <div class="log-title" style="font-size:13px;">พัสดุ: เอกสารสัญญาไม่ครบ</div>
+           <div class="log-desc" style="font-size:11px;">งานพัสดุ · นางสาวมาลี รักดี</div>
+         </div>
+         <div class="log-time" style="font-size:11px">07:30</div>
+       </div>
+
+       <div class="log-item" data-dept="it" style="grid-template-columns: 28px 1fr auto; gap: 12px; padding: 10px 0; border-bottom:none; cursor: pointer;" onclick="openLogDetail('เมื่อวาน', 'ปิดเคส: ฐานข้อมูลบุคลากรเสร็จสิ้น', 'งานสารสนเทศ · นางสาวใจ ดีงาม', 'ok', 'สำเร็จ', 'ปิดการแจ้งเตือนสำเร็จ')">
+         <div class="role-icon" style="width:28px;height:28px;background:var(--ok-bg);border-radius:6px;border:1px solid rgba(56,161,105,0.2);">
+           <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--ok)"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+         </div>
+         <div>
+           <div class="log-title" style="font-size:13px;">ปิดเคส: ฐานข้อมูล...เสร็จสิ้น</div>
+           <div class="log-desc" style="font-size:11px;">งานสารสนเทศ · นางสาวใจ...</div>
+         </div>
+         <div class="log-time" style="font-size:11px">เมื่อวาน</div>
+       </div>
+    </div>
+  </div>
+
+</div>

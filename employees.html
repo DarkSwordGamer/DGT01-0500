@@ -1,0 +1,91 @@
+<div class="page" id="page-employees">
+      <div class="page-title">ปัญหาติดขัดรายพนักงาน</div>
+      <div class="page-sub">ระบุถึงระดับบุคคล — แสดงพนักงานที่มีงานล่าช้าหรือภาระงานเกินเกณฑ์</div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>พนักงาน</th><th>ตำแหน่ง</th><th>ภาระงาน</th><th>ปัญหาที่พบ</th><th>ค้างมา</th><th>สถานะ</th><th>การจัดการ</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="row" style="gap:10px">
+                    <div class="staff-av av-danger" style="width:32px;height:32px;font-size:11px">KN</div>
+                    <div><div style="font-weight:600;color:var(--text-pri)">Kin</div><div class="mono" style="font-size:10px;color:var(--text-ter)">จุดบริการ A</div></div>
+                  </div>
+                </td>
+                <td>เจ้าหน้าที่การเงิน</td>
+                <td>
+                  <div class="row" style="gap:8px">
+                    <div style="width:60px"><div class="bar-track"><div class="bar-fill bar-danger" style="width:100%"></div></div></div>
+                    <span style="color:var(--danger);font-family:var(--mono);font-size:12px;font-weight:600">130%</span>
+                  </div>
+                </td>
+                <td><div style="font-size:12px;color:var(--text-pri)">ภาระงานล้นมือ</div><div style="font-size:11px;color:var(--text-sec)">งานค้าง 8 · SLA หมด 2 รายการ</div></td>
+                <td class="mono">3 ชม.</td>
+                <td><span class="badge danger"><span class="badge-dot"></span>วิกฤต</span></td>
+                <td><div class="btn-group"><button class="btn-sm btn-danger" onclick="openReassign('Kin','Ice')">Re-assign</button><button class="btn-sm" onclick="openDetail('KIN')">ดูงาน</button></div></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="row" style="gap:10px">
+                    <div class="staff-av av-warn" style="width:32px;height:32px;font-size:11px">TH</div>
+                    <div><div style="font-weight:600;color:var(--text-pri)">Thee</div><div class="mono" style="font-size:10px;color:var(--text-ter)">จุดบริการ B</div></div>
+                  </div>
+                </td>
+                <td>เจ้าหน้าที่พัสดุ</td>
+                <td>
+                  <div class="row" style="gap:8px">
+                    <div style="width:60px"><div class="bar-track"><div class="bar-fill bar-warn" style="width:85%"></div></div></div>
+                    <span style="color:var(--warn);font-family:var(--mono);font-size:12px;font-weight:600">110%</span>
+                  </div>
+                </td>
+                <td><div style="font-size:12px;color:var(--text-pri)">คิวงานกระจุกตัว</div><div style="font-size:11px;color:var(--text-sec)">รอประมวลผล 15 รายการ</div></td>
+                <td class="mono">1 ชม.</td>
+                <td><span class="badge warn"><span class="badge-dot"></span>เฝ้าระวัง</span></td>
+                <td><div class="btn-group"><button class="btn-sm btn-warn" onclick="openReassign('Thee','Ice')">Re-assign</button><button class="btn-sm" onclick="showToast('Escalate ไปยังหัวหน้าฝ่ายพัสดุ')">Escalate</button></div></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="row" style="gap:10px">
+                    <div class="staff-av av-ok" style="width:32px;height:32px;font-size:11px">PK</div>
+                    <div><div style="font-weight:600;color:var(--text-pri)">Pok</div><div class="mono" style="font-size:10px;color:var(--text-ter)">จุดบริการ C</div></div>
+                  </div>
+                </td>
+                <td>เจ้าหน้าที่บุคคล</td>
+                <td>
+                  <div class="row" style="gap:8px">
+                    <div style="width:60px"><div class="bar-track"><div class="bar-fill bar-ok" style="width:65%"></div></div></div>
+                    <span style="color:var(--ok);font-family:var(--mono);font-size:12px;font-weight:600">85%</span>
+                  </div>
+                </td>
+                <td><div style="font-size:12px;color:var(--text-pri)">ไม่มีปัญหา</div><div style="font-size:11px;color:var(--text-sec)">ดำเนินการปกติ</div></td>
+                <td class="mono">—</td>
+                <td><span class="badge ok"><span class="badge-dot"></span>ปกติ</span></td>
+                <td><button class="btn-sm" onclick="openDetail('POK')">ดูงาน</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="row" style="gap:10px">
+                    <div class="staff-av av-idle" style="width:32px;height:32px;font-size:11px">IC</div>
+                    <div><div style="font-weight:600;color:var(--text-pri)">Ice</div><div class="mono" style="font-size:10px;color:var(--text-ter)">จุดบริการ D</div></div>
+                  </div>
+                </td>
+                <td>เจ้าหน้าที่สำนักงาน</td>
+                <td>
+                  <div class="row" style="gap:8px">
+                    <div style="width:60px"><div class="bar-track"><div class="bar-fill bar-idle" style="width:30%"></div></div></div>
+                    <span style="color:var(--text-sec);font-family:var(--mono);font-size:12px;font-weight:600">40%</span>
+                  </div>
+                </td>
+                <td><div style="font-size:12px;color:var(--ok)">รับงานโอนย้ายได้</div><div style="font-size:11px;color:var(--text-sec)">Capacity เหลือ 60%</div></td>
+                <td class="mono">—</td>
+                <td><span class="badge info">ว่าง</span></td>
+                <td><button class="btn-sm btn-ok" onclick="showToast('มอบหมายงานไปยัง Ice แล้ว')">มอบหมายงาน</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>

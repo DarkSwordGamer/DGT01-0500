@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>มอดูล 5 — Operational Risk & Alert System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="module5_system.css">
+</head>
+
+<body>
+
+  <!-- ─── LOGIN PAGE ─────────────────────────────────────────── -->
+  <div id="login-page"
+    style="display: flex; flex: 1; align-items: center; justify-content: center; background: var(--bg-base); position: absolute; inset: 0; z-index: 1000;">
+    <div class="card" style="width: 360px; text-align: center; padding: 40px 30px;">
+      <div class="logo-badge" style="margin: 0 auto 16px; width: 48px; height: 48px; border-radius: 12px;">
+        <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+          <path
+            d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6l-8-4zm0 10.9l-4-4L9.4 7.5l2.6 2.6 4.6-4.6 1.4 1.4L12 12.9z" />
+        </svg>
+      </div>
+      <div class="page-title" style="margin-bottom: 4px;">Risk & Alert System</div>
+      <div class="page-sub" style="margin-bottom: 24px;">เข้าสู่ระบบเพื่อจัดการความเสี่ยง</div>
+
+      <div class="form-row" style="text-align: left;">
+        <label class="form-label">ชื่อผู้ใช้งาน</label>
+        <input type="text" class="form-input" id="login-username" placeholder="กรอกชื่อผู้ใช้งาน..." value="admin">
+      </div>
+      <div class="form-row" style="text-align: left; margin-bottom: 16px;">
+        <label class="form-label">รหัสผ่าน</label>
+        <input type="password" class="form-input" id="login-password" placeholder="••••••••" value="password">
+      </div>
+
+      <div class="row-between" style="margin-bottom: 24px; font-size: 12px;">
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="login-remember"> บันทึกข้อมูลการเข้าสู่ระบบ
+        </label>
+        <a href="javascript:void(0)" style="color: var(--primary); text-decoration: none;"
+          onclick="openForgotPassword()">ลืมรหัสผ่าน?</a>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; padding: 10px; font-size: 13px;"
+        onclick="doLogin()">เข้าสู่ระบบ</button>
+    </div>
+  </div>
+
+  <!-- ─── LOGOUT PAGE ─────────────────────────────────────────── -->
+  <div id="logout-page"
+    style="display: none; flex: 1; align-items: center; justify-content: center; background: var(--bg-base); position: absolute; inset: 0; z-index: 1000;">
+    <div class="card" style="width: 360px; text-align: center; padding: 40px 30px;">
+      <div class="logo-badge"
+        style="margin: 0 auto 16px; width: 48px; height: 48px; border-radius: 12px; background: var(--ok-dim); color: var(--ok); border: 1px solid rgba(56,161,105,0.2);">
+        <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: currentColor;">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+        </svg>
+      </div>
+      <div class="page-title" style="margin-bottom: 4px;">ออกจากระบบสำเร็จ</div>
+      <div class="page-sub" style="margin-bottom: 24px;">คุณได้ออกจากระบบอย่างปลอดภัยแล้ว</div>
+
+      <button class="btn btn-primary" style="width: 100%; padding: 10px; font-size: 13px;"
+        onclick="returnToLogin()">กลับไปหน้าเข้าสู่ระบบ</button>
+    </div>
+  </div>
+
+  <!-- ─── FORGOT PASSWORD PAGE (Step 1: Email) ──────────────── -->
+  <div id="forgot-page"
+    style="display: none; flex: 1; align-items: center; justify-content: center; background: var(--bg-base); position: absolute; inset: 0; z-index: 1000;">
+    <div class="card" style="width: 360px; text-align: center; padding: 40px 30px;">
+      <div class="logo-badge"
+        style="margin: 0 auto 16px; width: 48px; height: 48px; border-radius: 12px; background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(221,107,32,0.2);">
+        <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: currentColor;">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+        </svg>
+      </div>
+      <div class="page-title" style="margin-bottom: 4px;">ลืมรหัสผ่าน</div>
+      <div class="page-sub" style="margin-bottom: 24px;">กรุณากรอกอีเมลเพื่อรับรหัส OTP</div>
+
+      <div class="form-row" style="text-align: left; margin-bottom: 24px;">
+        <label class="form-label">อีเมล</label>
+        <input type="text" class="form-input" id="forgot-input-email" placeholder="admin@example.com">
+      </div>
+
+      <div class="row" style="gap: 12px;">
+        <button class="btn" style="flex: 1; padding: 10px; font-size: 13px;" onclick="cancelForgot()">ยกเลิก</button>
+        <button class="btn btn-primary" style="flex: 1; padding: 10px; font-size: 13px;" onclick="requestOTP()">รับรหัส
+          OTP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── OTP PAGE (Step 2: OTP Verification) ────────────────── -->
+  <div id="otp-page"
+    style="display: none; flex: 1; align-items: center; justify-content: center; background: var(--bg-base); position: absolute; inset: 0; z-index: 1000;">
+    <div class="card" style="width: 360px; text-align: center; padding: 40px 30px;">
+      <div class="logo-badge"
+        style="margin: 0 auto 16px; width: 48px; height: 48px; border-radius: 12px; background: var(--info-bg); color: var(--info); border: 1px solid rgba(49,130,206,0.2);">
+        <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: currentColor;">
+          <path
+            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+        </svg>
+      </div>
+      <div class="page-title" style="margin-bottom: 4px;">ยืนยันรหัส OTP</div>
+      <div class="page-sub" style="margin-bottom: 24px;">รหัส OTP จำนวน 6 หลักได้ถูกส่งไปยังอีเมลของคุณแล้ว</div>
+
+      <div class="form-row" style="text-align: left; margin-bottom: 24px;">
+        <label class="form-label">รหัส OTP</label>
+        <input type="text" class="form-input" id="otp-input" placeholder="123456"
+          style="text-align: center; letter-spacing: 4px; font-size: 18px; font-family: var(--mono);">
+      </div>
+
+      <div class="row" style="gap: 12px;">
+        <button class="btn" style="flex: 1; padding: 10px; font-size: 13px;" onclick="cancelForgot()">ยกเลิก</button>
+        <button class="btn btn-primary" style="flex: 1; padding: 10px; font-size: 13px;"
+          onclick="verifyOTP()">ยืนยันรหัส</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── RESET PASSWORD PAGE (Step 3: New Password) ──────────── -->
+  <div id="reset-pw-page"
+    style="display: none; flex: 1; align-items: center; justify-content: center; background: var(--bg-base); position: absolute; inset: 0; z-index: 1000;">
+    <div class="card" style="width: 360px; text-align: center; padding: 40px 30px;">
+      <div class="logo-badge"
+        style="margin: 0 auto 16px; width: 48px; height: 48px; border-radius: 12px; background: var(--ok-dim); color: var(--ok); border: 1px solid rgba(56,161,105,0.2);">
+        <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: currentColor;">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v-4h-2v4H7v2h4v4h2v-4h4v-2z" />
+        </svg>
+      </div>
+      <div class="page-title" style="margin-bottom: 4px;">ตั้งรหัสผ่านใหม่</div>
+      <div class="page-sub" style="margin-bottom: 24px;">กรุณาตั้งรหัสผ่านใหม่ความยาวอย่างน้อย 8 ตัวอักษร</div>
+
+      <div class="form-row" style="text-align: left; margin-bottom: 12px;">
+        <label class="form-label">รหัสผ่านใหม่</label>
+        <input type="password" class="form-input" id="reset-new-pw" placeholder="••••••••">
+      </div>
+      <div class="form-row" style="text-align: left; margin-bottom: 24px;">
+        <label class="form-label">ยืนยันรหัสผ่านใหม่</label>
+        <input type="password" class="form-input" id="reset-confirm-pw" placeholder="••••••••">
+      </div>
+
+      <div class="row" style="gap: 12px;">
+        <button class="btn" style="flex: 1; padding: 10px; font-size: 13px;" onclick="cancelForgot()">ยกเลิก</button>
+        <button class="btn btn-primary" style="flex: 1; padding: 10px; font-size: 13px;"
+          onclick="submitNewPassword()">เปลี่ยนรหัสผ่าน</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="app-container" style="display: none; flex-direction: column; height: 100%; width: 100%;">
+    <!-- ─── HEADER ─────────────────────────────────────────────── -->
+    <div class="header">
+      <div class="logo">
+
+        <div class="logo-badge">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6l-8-4zm0 10.9l-4-4L9.4 7.5l2.6 2.6 4.6-4.6 1.4 1.4L12 12.9z" />
+          </svg>
+        </div>
+        <div>
+          <div class="logo-title">Risk & Alert System</div>
+          <div class="logo-sub">มอดูล 05 · v1.0</div>
+        </div>
+      </div>
+
+      <div class="alert-strip">
+        <div class="alert-dot"></div>
+        <div class="alert-ticker-wrap">
+          <div class="alert-ticker">⚠ ระบบเครือข่ายหลักขัดข้องตั้งแต่ 09:12 น. — ส่งผลให้ระบบเบิกจ่ายล่าช้าอัตโนมัติ
+            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ⚠ Kin (จุดบริการ A) ภาระงาน 130% — SLA หมดเกินกำหนด 2 รายการ
+            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ⚠ เอกสารตีกลับจากระบบบัญชี ยังไม่ได้รับการแก้ไข 45 นาที</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="clock-box">
+          <div class="clock-time" id="clock">--:--:--</div>
+          <div class="clock-date" id="date">กำลังโหลด...</div>
+        </div>
+        <div style="position:relative;">
+          <div class="avatar-btn" title="นางสาวปวีณา ศรีสุข (Admin)" onclick="toggleProfileMenu()">PW</div>
+          <div id="profile-menu" class="card"
+            style="display:none; position:absolute; top:100%; right:0; margin-top:8px; width:200px; padding:8px; z-index:100;">
+            <div style="padding:8px; border-bottom:1px solid var(--border); margin-bottom:8px;">
+              <div style="font-weight:600;font-size:13px;color:var(--text-pri)">ปวีณา ศรีสุข</div>
+              <div style="font-size:11px;color:var(--text-sec)">ผู้ดูแลระบบ</div>
+            </div>
+            <button class="btn"
+              style="width:100%;text-align:left;margin-bottom:4px;border:none;background:transparent;padding:8px"
+              onclick="openChangePassword()">เปลี่ยนรหัสผ่าน</button>
+            <button class="btn"
+              style="width:100%;text-align:left;color:var(--danger);border:none;background:transparent;padding:8px"
+              onclick="doLogout()">ออกจากระบบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── BODY ───────────────────────────────────────────────── -->
+    <div class="body-wrap">
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-section">ภาพรวม</div>
+        <div class="nav-item active" onclick="nav(this,'dashboard')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+          </svg>
+          แดชบอร์ดหลัก
+          <span class="nav-badge">7</span>
+        </div>
+        <div class="nav-item" onclick="nav(this,'employees')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+          </svg>
+          ปัญหาพนักงาน
+          <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item" onclick="nav(this,'log')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
+          </svg>
+          ประวัติแจ้งเตือน
+        </div>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">การตั้งค่า</div>
+        <div class="nav-item" onclick="nav(this,'modules')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" />
+          </svg>
+          แหล่งข้อมูลมอดูล
+        </div>
+        <div class="nav-item" onclick="nav(this,'alerts')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
+          </svg>
+          เงื่อนไขแจ้งเตือน
+        </div>
+        <div class="nav-item" onclick="nav(this,'roles')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
+          </svg>
+          สิทธิ์ผู้ใช้งาน
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main">
+
+
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- ══════════════════════════════════════════════ -->
+        <!-- ══════════════════════════════════════════════ -->
+        <div id="page-content" style="flex:1; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden;">
+        </div>
+      </div><!-- /main -->
+    </div><!-- /body-wrap -->
+  </div><!-- /app-container -->
+
+  <!-- ─── MODAL: Reassign ────────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-reassign">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModal('modal-reassign')">✕</button>
+      <div class="modal-title">Re-assign งาน</div>
+      <div class="modal-sub" id="reassign-sub">โอนคิวงานไปยังเจ้าหน้าที่ที่ว่าง</div>
+      <div class="form-row"><label class="form-label">จากพนักงาน</label><input class="form-input" id="from-staff"
+          readonly></div>
+      <div class="form-row"><label class="form-label">ไปยังพนักงาน</label><select class="form-select" id="to-staff">
+          <option>Ice (40% · ว่าง)</option>
+          <option>Pok (85% · ปกติ)</option>
+        </select></div>
+      <div class="form-row"><label class="form-label">จำนวนงานที่โอน</label><input class="form-input" type="number"
+          value="4" min="1"></div>
+      <div class="form-row"><label class="form-label">หมายเหตุ</label><input class="form-input"
+          placeholder="ระบุเหตุผลการโอนงาน..."></div>
+      <div class="row" style="justify-content:flex-end;gap:8px;margin-top:16px">
+        <button class="btn" onclick="closeModal('modal-reassign')">ยกเลิก</button>
+        <button class="btn btn-primary" onclick="doReassign()">ยืนยัน Re-assign</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MODAL: Detail ─────────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-detail">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModal('modal-detail')">✕</button>
+      <div class="modal-title">รายละเอียดแจ้งเตือน</div>
+      <div class="modal-sub">ข้อมูลเต็มของรายการความเสี่ยง</div>
+      <div
+        style="background:var(--danger-dim);border:1px solid rgba(240,78,78,0.2);border-radius:8px;padding:14px;margin-bottom:14px">
+        <div style="font-size:10px;font-family:var(--mono);color:var(--danger);margin-bottom:6px">ระดับ: วิกฤต</div>
+        <div style="font-weight:600;font-size:14px;color:var(--text-pri);margin-bottom:4px">คำร้องขอทุนศึกษาต่อ — ID:001
+        </div>
+        <div style="font-size:11px;color:var(--text-sec)">เกินกำหนด 1 วัน — ต้องดำเนินการด่วน</div>
+      </div>
+      <div class="rule-field" style="margin-bottom:8px"><span class="rule-key">มอดูลที่แจ้ง</span><span
+          class="rule-val">มอดูล 2 (คิวงาน)</span></div>
+      <div class="rule-field" style="margin-bottom:8px"><span class="rule-key">เจ้าหน้าที่</span><span
+          class="rule-val">Kin (จุดบริการ A)</span></div>
+      <div class="rule-field" style="margin-bottom:8px"><span class="rule-key">SLA กำหนดเดิม</span><span
+          class="rule-val">28 เม.ย. 2568 16:00</span></div>
+      <div class="rule-field" style="margin-bottom:8px"><span class="rule-key">สถานะปัจจุบัน</span><span
+          class="rule-val" style="color:var(--danger)">เกินกำหนด — รอดำเนินการ</span></div>
+      <div class="rule-field" style="margin-bottom:14px"><span class="rule-key">ส่งแจ้งเตือนแล้ว</span><span
+          class="rule-val">3 ครั้ง (08:55, 09:55, 10:55)</span></div>
+      <div class="row" style="justify-content:flex-end;gap:8px">
+        <button class="btn" onclick="closeModal('modal-detail')">ปิด</button>
+        <button class="btn btn-warn"
+          onclick="showToast('ขยายเวลา SLA เรียบร้อยแล้ว');closeModal('modal-detail')">ขยายเวลา SLA</button>
+        <button class="btn btn-danger"
+          onclick="showToast('Escalate ไปยังผู้บริหาร');closeModal('modal-detail')">Escalate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MODAL: Log Detail ──────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-log">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModal('modal-log')">✕</button>
+      <div class="modal-title">รายละเอียดการแจ้งเตือน</div>
+      <div class="modal-sub" id="log-time-sub">เวลา 10:42 น.</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse">
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:8px 0;color:var(--text-sec);width:120px">ระดับ</td>
+          <td><span class="badge danger"><span class="badge-dot"></span>วิกฤต</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:8px 0;color:var(--text-sec)">ผู้รับแจ้งเตือน</td>
+          <td style="color:var(--text-pri);padding:8px 0">Kin (จุดบริการ A)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:8px 0;color:var(--text-sec)">เรื่อง</td>
+          <td style="color:var(--text-pri);padding:8px 0">ภาระงานเกิน 130% คิวงานล้นมือ</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:8px 0;color:var(--text-sec)">ช่องทาง</td>
+          <td style="padding:8px 0">
+            <div class="ch-tags" style="margin-top:0"><span class="ch-tag">Line Notify</span><span
+                class="ch-tag">อีเมล</span><span class="ch-tag">SMS</span></div>
+          </td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:8px 0;color:var(--text-sec)">ส่งโดย</td>
+          <td style="color:var(--text-pri);font-family:var(--mono);font-size:11px;padding:8px 0">ระบบอัตโนมัติ (มอดูล 4)
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:var(--text-sec)">ผลลัพธ์</td>
+          <td style="color:var(--ok);padding:8px 0">แจ้งเตือนสำเร็จ · อ่านแล้ว 10:50 น.</td>
+        </tr>
+      </table>
+      <div class="row" style="justify-content:flex-end;margin-top:16px">
+        <button class="btn btn-primary" onclick="closeModal('modal-log')">ปิด</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ─── MODAL: Change Password ───────────────────────────────── -->
+  <div class="modal-overlay" id="modal-changepw">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModal('modal-changepw')">✕</button>
+      <div class="modal-title">เปลี่ยนรหัสผ่าน</div>
+      <div class="modal-sub">รหัสผ่านใหม่ต้องมีความยาวอย่างน้อย 8 ตัวอักษร</div>
+      <div class="form-row">
+        <label class="form-label">รหัสผ่านเดิม</label>
+        <input type="password" class="form-input" id="old-pw" placeholder="••••••••">
+      </div>
+      <div class="form-row">
+        <label class="form-label">รหัสผ่านใหม่</label>
+        <input type="password" class="form-input" id="new-pw" placeholder="••••••••">
+      </div>
+      <div class="form-row">
+        <label class="form-label">ยืนยันรหัสผ่านใหม่</label>
+        <input type="password" class="form-input" id="confirm-new-pw" placeholder="••••••••">
+      </div>
+      <div class="row" style="justify-content:flex-end;gap:8px;margin-top:16px">
+        <button class="btn" onclick="closeModal('modal-changepw')">ยกเลิก</button>
+        <button class="btn btn-primary" onclick="doChangePassword()">บันทึกรหัสผ่านใหม่</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TOAST ──────────────────────────────────────────────── -->
+  <div class="toast" id="toast">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+    </svg>
+    <span id="toast-msg"></span>
+  </div>
+
+  <script src="module5_system.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<div class="page" id="page-modules">
+      <div class="page-title">แหล่งข้อมูลมอดูล</div>
+      <div class="page-sub">กำหนดว่ามอดูลไหนส่งข้อมูลมาให้มอดูล 5 ตรวจจับความเสี่ยง และตั้งเกณฑ์การแจ้งเตือน</div>
+
+      <div class="module-card on">
+        <div class="module-top">
+          <span class="mod-chip mc-blue">มอดูล 1</span>
+          <span class="mod-name">โครงสร้างภารกิจ — สายการบังคับบัญชา</span>
+          <label class="toggle"><input type="checkbox" checked onchange="toggleMod(this,'mod1')"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="mod-desc">ดึงข้อมูลลำดับขั้น เพื่อกำหนดเส้นทาง Escalate เมื่อเกิดความเสี่ยงสูง (เจ้าหน้าที่ → หัวหน้าฝ่าย → ผู้อำนวยการกอง)</div>
+        <div class="form-row-2">
+          <div class="form-row"><label class="form-label">ระดับที่ต้อง Escalate</label><select class="form-select"><option>หัวหน้าฝ่าย</option><option>ผู้อำนวยการกอง</option></select></div>
+          <div class="form-row"><label class="form-label">เงื่อนไข (ระดับความเสี่ยง)</label><select class="form-select"><option>วิกฤต (🔴) เท่านั้น</option><option>เฝ้าระวัง + วิกฤต</option></select></div>
+        </div>
+      </div>
+
+      <div class="module-card on">
+        <div class="module-top">
+          <span class="mod-chip mc-purple">มอดูล 2</span>
+          <span class="mod-name">บริหารคิวงาน — สถานะตั๋วงานและ SLA</span>
+          <label class="toggle"><input type="checkbox" checked onchange="toggleMod(this,'mod2')"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="mod-desc">ดึงสถานะ Ticket และเวลาที่เหลือก่อน SLA หมด เพื่อแจ้งเตือนล่วงหน้า และตรวจจับคิวงานที่กระจุกตัว</div>
+        <div class="form-row-2">
+          <div class="form-row"><label class="form-label">แจ้งเตือนเมื่อเหลือ SLA (ชม.)</label><input class="form-input" type="number" value="2" min="1" max="24"></div>
+          <div class="form-row"><label class="form-label">คิวกระจุกตัว (รายการ)</label><input class="form-input" type="number" value="20" min="1"></div>
+        </div>
+      </div>
+
+      <div class="module-card on">
+        <div class="module-top">
+          <span class="mod-chip mc-green">มอดูล 3</span>
+          <span class="mod-name">วิเคราะห์ภาระงาน — เวลามาตรฐานกระบวนการ</span>
+          <label class="toggle"><input type="checkbox" checked onchange="toggleMod(this,'mod3')"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="mod-desc">นำ Standard Time มาตั้ง Countdown Timer และสร้างเงื่อนไขแจ้งเตือนงานล่าช้าอัตโนมัติ</div>
+        <div class="form-row-2">
+          <div class="form-row"><label class="form-label">% เกินเวลาก่อนแจ้งเตือน</label><input class="form-input" type="number" value="110" min="100" max="200"></div>
+          <div class="form-row"><label class="form-label">อัปเดตข้อมูลทุก (นาที)</label><input class="form-input" type="number" value="5" min="1"></div>
+        </div>
+      </div>
+
+      <div class="module-card on">
+        <div class="module-top">
+          <span class="mod-chip mc-red">มอดูล 4</span>
+          <span class="mod-name">บริหารอัตรากำลัง — Capacity รายคน</span>
+          <label class="toggle"><input type="checkbox" checked onchange="toggleMod(this,'mod4')"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="mod-desc">ดึงภาระงาน (%) ของเจ้าหน้าที่แต่ละคน เพื่อสร้าง Predictive Alert ก่อนงานจะช้า</div>
+        <div class="form-row-2">
+          <div class="form-row"><label class="form-label">เกณฑ์เตือน (% ภาระงาน)</label><input class="form-input" type="number" value="100" min="80" max="150"></div>
+          <div class="form-row"><label class="form-label">เกณฑ์วิกฤต (%)</label><input class="form-input" type="number" value="120" min="100" max="200"></div>
+        </div>
+      </div>
+
+      <div class="module-card on">
+        <div class="module-top">
+          <span class="mod-chip mc-amber">มอดูล 6</span>
+          <span class="mod-name">รายงานผู้บริหาร — ส่งสถิติสรุปรายเดือน</span>
+          <label class="toggle"><input type="checkbox" checked onchange="toggleMod(this,'mod6')"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="mod-desc">รวบรวมความเสี่ยงที่เกิดและแก้ไขแล้ว ส่งออกเป็นกราฟภาพรวมรายเดือน/รายปี</div>
+        <div class="form-row-2">
+          <div class="form-row"><label class="form-label">ส่งรายงานอัตโนมัติ</label><select class="form-select"><option>ทุกสิ้นเดือน</option><option>ทุกสัปดาห์</option><option>ปิดใช้งาน</option></select></div>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:flex-end;gap:10px;margin-top:20px">
+        <button class="btn" onclick="">ยกเลิก</button>
+        <button class="btn btn-primary" onclick="showToast('บันทึกการตั้งค่าแหล่งข้อมูลเรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
+      </div>
+    </div>

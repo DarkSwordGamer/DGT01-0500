@@ -1,0 +1,78 @@
+<div class="page" id="page-log">
+      <div class="page-title">ประวัติการแจ้งเตือน</div>
+      <div class="page-sub">บันทึกการแจ้งเตือนทั้งหมด — ดูได้ว่าแจ้งใคร แจ้งอะไร ผ่านช่องทางไหน</div>
+      <div class="stat-grid">
+        <div class="stat-mini"><div class="stat-mini-num" style="color:var(--danger)">7</div><div class="stat-mini-lbl">วิกฤต (วันนี้)</div></div>
+        <div class="stat-mini"><div class="stat-mini-num" style="color:var(--warn)">12</div><div class="stat-mini-lbl">เฝ้าระวัง (วันนี้)</div></div>
+        <div class="stat-mini"><div class="stat-mini-num" style="color:var(--info)">3</div><div class="stat-mini-lbl">Escalate แล้ว</div></div>
+      </div>
+      <div class="row-between mb-md">
+        <div class="filters" style="margin-bottom:0">
+          <button class="filter-btn active" onclick="filterLog(this,'all')">ทั้งหมด</button>
+          <button class="filter-btn" onclick="filterLog(this,'danger')">วิกฤต</button>
+          <button class="filter-btn" onclick="filterLog(this,'warn')">เฝ้าระวัง</button>
+          <button class="filter-btn" onclick="filterLog(this,'kin')">Kin</button>
+          <button class="filter-btn" onclick="filterLog(this,'thee')">Thee</button>
+        </div>
+        <button class="btn btn-sm" onclick="showToast('ส่งออก Excel เรียบร้อยแล้ว')">ส่งออก Excel</button>
+      </div>
+      <div class="card">
+        <div id="log-list">
+          <div class="log-item" data-tags="danger kin">
+            <div class="log-time">10:42 น.</div>
+            <span class="badge danger"><span class="badge-dot"></span>วิกฤต</span>
+            <span style="font-size:12px;font-weight:500;color:var(--text-pri)">Kin (จุดบริการ A)</span>
+            <div>
+              <div class="log-title">ภาระงานเกิน 130% — คิวงานล้นมือ SLA ใกล้หมด 2 รายการ</div>
+              <div class="log-desc">งานค้าง 8 รายการ ไม่สามารถดำเนินการได้ทันเวลา</div>
+              <div class="ch-tags"><span class="ch-tag">Line Notify</span><span class="ch-tag">อีเมล</span><span class="ch-tag">SMS</span></div>
+            </div>
+            <button class="btn-sm" onclick="openLogDetail('10:42')">รายละเอียด</button>
+          </div>
+          <div class="log-item" data-tags="danger escalate">
+            <div class="log-time">10:15 น.</div>
+            <span class="badge danger"><span class="badge-dot"></span>วิกฤต</span>
+            <span style="font-size:12px;font-weight:500;color:var(--text-pri)">Escalate → นายวิชัย</span>
+            <div>
+              <div class="log-title">เอกสารตีกลับจากระบบบัญชี ค้างนาน 45 นาที ยังไม่แก้ไข</div>
+              <div class="log-desc">Escalate ไปยังหัวหน้าฝ่ายการเงิน — นายวิชัย มานะดี</div>
+              <div class="ch-tags"><span class="ch-tag">Line Notify</span><span class="ch-tag">อีเมล</span></div>
+            </div>
+            <button class="btn-sm" onclick="openLogDetail('10:15')">รายละเอียด</button>
+          </div>
+          <div class="log-item" data-tags="warn thee">
+            <div class="log-time">09:50 น.</div>
+            <span class="badge warn"><span class="badge-dot"></span>เฝ้าระวัง</span>
+            <span style="font-size:12px;font-weight:500;color:var(--text-pri)">Thee (จุดบริการ B)</span>
+            <div>
+              <div class="log-title">คิวกระจุกตัว 15 รายการ — งานรอประมวลผลนาน 4 ชั่วโมง</div>
+              <div class="log-desc">เบิกจ่ายงบประมาณโครงการ Q2 ค้างรออนุมัติ</div>
+              <div class="ch-tags"><span class="ch-tag">Line Notify</span><span class="ch-tag">อีเมล</span></div>
+            </div>
+            <button class="btn-sm" onclick="openLogDetail('09:50')">รายละเอียด</button>
+          </div>
+          <div class="log-item" data-tags="danger all-dept">
+            <div class="log-time">09:12 น.</div>
+            <span class="badge danger"><span class="badge-dot"></span>วิกฤต</span>
+            <span style="font-size:12px;font-weight:500;color:var(--text-pri)">ทุกฝ่าย (มอดูล 7)</span>
+            <div>
+              <div class="log-title">ระบบเครือข่ายหลักขัดข้อง — ระบบเบิกจ่ายล่าช้าอัตโนมัติ</div>
+              <div class="log-desc">แจ้งเตือนระดับองค์กร — ทุกหน่วยงาน</div>
+              <div class="ch-tags"><span class="ch-tag">Line Notify</span><span class="ch-tag">อีเมล</span><span class="ch-tag">SMS</span><span class="ch-tag">ประกาศระบบ</span></div>
+            </div>
+            <button class="btn-sm" onclick="openLogDetail('09:12')">รายละเอียด</button>
+          </div>
+          <div class="log-item" data-tags="warn kin">
+            <div class="log-time">08:55 น.</div>
+            <span class="badge warn"><span class="badge-dot"></span>เฝ้าระวัง</span>
+            <span style="font-size:12px;font-weight:500;color:var(--text-pri)">Kin (จุดบริการ A)</span>
+            <div>
+              <div class="log-title">SLA ใกล้หมด 3 รายการ — คำร้องขอทุนศึกษาต่อ เหลือ 1:30 น.</div>
+              <div class="log-desc">แจ้งเตือนล่วงหน้าก่อน SLA หมด 2 ชั่วโมง</div>
+              <div class="ch-tags"><span class="ch-tag">Line Notify</span></div>
+            </div>
+            <button class="btn-sm" onclick="openLogDetail('08:55')">รายละเอียด</button>
+          </div>
+        </div>
+      </div>
+    </div>

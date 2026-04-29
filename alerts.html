@@ -1,0 +1,75 @@
+<div class="page" id="page-alerts">
+      <div class="page-title">เงื่อนไขและรูปแบบการแจ้งเตือน</div>
+      <div class="page-sub">กำหนดช่องทาง ผู้รับ และเงื่อนไขที่จะส่งแจ้งเตือนไปยังผู้เกี่ยวข้อง</div>
+
+      <div class="section-hd" style="margin-bottom:14px">ช่องทางตามระดับความเสี่ยง</div>
+      <div class="rule-card">
+        <div class="rule-level">
+          <span class="badge danger"><span class="badge-dot"></span>วิกฤต</span>
+          <label class="toggle"><input type="checkbox" checked><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="rule-body">
+          <div class="rule-field"><span class="rule-key">เงื่อนไข</span><span class="rule-val">ภาระงาน &gt; 120% หรืองานเกิน SLA</span></div>
+          <div class="rule-field"><span class="rule-key">ช่องทาง</span>
+            <div class="btn-group">
+              <button class="btn-sm btn-ok" style="font-size:10px;padding:2px 8px">Line Notify ✓</button>
+              <button class="btn-sm btn-ok" style="font-size:10px;padding:2px 8px">อีเมล ✓</button>
+              <button class="btn-sm btn-ok" style="font-size:10px;padding:2px 8px">SMS ✓</button>
+            </div>
+          </div>
+          <div class="rule-field"><span class="rule-key">ผู้รับ</span><span class="rule-val">หัวหน้างาน + ผู้อำนวยการกอง</span></div>
+          <div class="rule-field"><span class="rule-key">ส่งซ้ำ</span><span class="rule-val">ทุก 30 นาที สูงสุด 3 ครั้ง → Escalate อัตโนมัติ</span></div>
+          <div class="rule-field"><span class="rule-key">นอกเวลา</span><span class="rule-val" style="color:var(--danger)">ส่งแจ้งเตือนได้ทุกเวลา</span></div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-level">
+          <span class="badge warn"><span class="badge-dot"></span>เฝ้าระวัง</span>
+          <label class="toggle"><input type="checkbox" checked><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="rule-body">
+          <div class="rule-field"><span class="rule-key">เงื่อนไข</span><span class="rule-val">ภาระงาน &gt; 100% หรือ SLA เหลือ &lt; 2 ชม.</span></div>
+          <div class="rule-field"><span class="rule-key">ช่องทาง</span>
+            <div class="btn-group">
+              <button class="btn-sm btn-ok" style="font-size:10px;padding:2px 8px">Line Notify ✓</button>
+              <button class="btn-sm btn-ok" style="font-size:10px;padding:2px 8px">อีเมล ✓</button>
+              <button class="btn-sm" style="font-size:10px;padding:2px 8px;color:var(--text-ter)">SMS —</button>
+            </div>
+          </div>
+          <div class="rule-field"><span class="rule-key">ผู้รับ</span><span class="rule-val">หัวหน้างาน + เจ้าหน้าที่</span></div>
+          <div class="rule-field"><span class="rule-key">ส่งซ้ำ</span><span class="rule-val">ทุก 30 นาที สูงสุด 3 ครั้ง → Escalate อัตโนมัติ</span></div>
+          <div class="rule-field"><span class="rule-key">นอกเวลา</span><span class="rule-val" style="color:var(--text-sec)">ส่งเฉพาะในเวลาทำการ (08:30–17:00)</span></div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-level">
+          <span class="badge ok"><span class="badge-dot"></span>ปกติ</span>
+          <label class="toggle"><input type="checkbox"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+        </div>
+        <div class="rule-body">
+          <div class="rule-field"><span class="rule-key">เงื่อนไข</span><span class="rule-val">สถานะทั่วไป ไม่มีความเสี่ยง</span></div>
+          <div class="rule-field"><span class="rule-key">ช่องทาง</span><span class="rule-val" style="color:var(--text-sec)">แจ้งเตือนในระบบเท่านั้น</span></div>
+          <div class="rule-field"><span class="rule-key">ผู้รับ</span><span class="rule-val">เจ้าหน้าที่ที่เกี่ยวข้องเท่านั้น</span></div>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+      <div class="section-hd" style="margin-bottom:14px">เงื่อนไขส่งแจ้งเตือนซ้ำและเวลาทำการ</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">ส่งซ้ำอัตโนมัติ</div>
+          <div class="form-row"><label class="form-label">ส่งซ้ำทุก (นาที)</label><input class="form-input" type="number" value="30" min="5"><p class="form-hint" style="margin-top:4px">หากยังไม่มีการแก้ไข ระบบจะส่งแจ้งเตือนซ้ำทุกช่วงเวลาที่กำหนด</p></div>
+          <div class="form-row"><label class="form-label">จำนวนครั้งสูงสุด</label><input class="form-input" type="number" value="3" min="1"><p class="form-hint" style="margin-top:4px">หลังจากครบแล้ว ระบบจะ Escalate ขึ้นสายบังคับบัญชาอัตโนมัติ</p></div>
+        </div>
+        <div class="card">
+          <div class="card-title">เวลาทำการ</div>
+          <div class="form-row"><label class="form-label">เริ่มต้น</label><input class="form-input" type="time" value="08:30"></div>
+          <div class="form-row"><label class="form-label">สิ้นสุด</label><input class="form-input" type="time" value="17:00"><p class="form-hint" style="margin-top:4px">กรณีวิกฤต ระบบจะส่งแจ้งเตือนนอกเวลาทำการโดยอัตโนมัติ ไม่ว่าจะตั้งค่าไว้อย่างไร</p></div>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:flex-end;gap:10px;margin-top:20px">
+        <button class="btn">ยกเลิก</button>
+        <button class="btn btn-primary" onclick="showToast('บันทึกเงื่อนไขการแจ้งเตือนเรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
+      </div>
+    </div>
